@@ -3,7 +3,7 @@ import streamlit.components.v1 as stc
 import pickle
 
 with open("Logistic_Regression_Modek.pkl", "rb") as file:
-    Logistic_Regression_Modek = pickle.load(file)
+    Logistic_Regression_Model = pickle.load(file)
 
 html_temp = """<div style="background-color:#000;padding:10px;border-radius:10px">
                 <h1 style="color:#fff;text-align:center">Loan Eligibility Prediction App</h1> 
@@ -35,7 +35,7 @@ def run_ml_app():
              """
     st.markdown(design, unsafe_allow_html=True)
     #Structure Form 
-    left, right = st.column((2,2))
+    left, right = st.columns((2,2))
     gender = left.selectbox("Gender", ("Male","Female"))
     married = right.selectbox("Married", ("Yes","No"))
     dependent = left.selectbox("Dependent", (0,1,2,3))
@@ -68,7 +68,7 @@ def predict(gender, married, dependent, education, self_employed, applicant_inco
     pro = 0 if property_are == "Semiurban" else 1 if property_are == "Urban" else 2
                              
     #Making prediction
-    prediction = Logistic_Regression_Modek(
+    prediction = Logistic_Regression_Model(
     [[gen,mar,dependent,edu,sem,applicant_income,coApplicant_income,
       loan_amount,loan_amount_term,credit_history,pro]]
     )
